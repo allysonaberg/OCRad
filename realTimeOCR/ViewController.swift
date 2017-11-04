@@ -10,7 +10,7 @@ import UIKit
 import AVKit
 import Vision
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -31,6 +31,32 @@ class ViewController: UIViewController {
     let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
     view.layer.addSublayer(previewLayer)
     previewLayer.frame = view.frame
+    
+    //PRAGRMA: HANDLING IMAGES TAKEN IN
+    let dataOutput = AVCaptureVideoDataOutput()
+    dataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "videoQueue"))
+    captureSession.addOutput(dataOutput)
+    
+  }
+  
+  //called everytime a camera frame is capture
+  func captureOutput(_ output: AVCaptureOutput, didDrop sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+    print("CAMERA CAPTURED")
+    
+    guard let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {return}
+    guard let model = try? VNCoreMLModel(for: SqueezeNet().model) else {return}
+    let request = VNCoreMLRequest(model: model) {(finishedReq, err) in
+      //error checking
+      print(finishedReq.results)
+      guard let results = finishedReq.results as? [VNClassificationObservation] else {return}
+      
+      guard let firstObservation = results.first else {return}
+      
+      print(firstObservation.identifier, firstObservation.confidence)
+    }
+//    try? VNImageRequestHandler(cgImage: , options: <#T##[VNImageOption : Any]#>).perform(<#T##requests: [VNRequest]##[VNRequest]#>)
+    try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
+
   }
 
   override func didReceiveMemoryWarning() {

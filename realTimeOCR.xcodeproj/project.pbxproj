@@ -12,6 +12,7 @@
 		419010181FAE59D5006315FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 419010161FAE59D5006315FC /* Main.storyboard */; };
 		4190101A1FAE59D5006315FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 419010191FAE59D5006315FC /* Assets.xcassets */; };
 		4190101D1FAE59D5006315FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4190101B1FAE59D5006315FC /* LaunchScreen.storyboard */; };
+		419010251FAE612E006315FC /* SqueezeNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 419010241FAE612D006315FC /* SqueezeNet.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		419010191FAE59D5006315FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4190101C1FAE59D5006315FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4190101E1FAE59D5006315FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		419010241FAE612D006315FC /* SqueezeNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SqueezeNet.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				419010121FAE59D5006315FC /* AppDelegate.swift */,
 				419010141FAE59D5006315FC /* ViewController.swift */,
+				419010241FAE612D006315FC /* SqueezeNet.mlmodel */,
 				419010161FAE59D5006315FC /* Main.storyboard */,
 				419010191FAE59D5006315FC /* Assets.xcassets */,
 				4190101B1FAE59D5006315FC /* LaunchScreen.storyboard */,
@@ -137,6 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				419010151FAE59D5006315FC /* ViewController.swift in Sources */,
+				419010251FAE612E006315FC /* SqueezeNet.mlmodel in Sources */,
 				419010131FAE59D5006315FC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,7 +281,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 723SYA9Q4W;
 				INFOPLIST_FILE = realTimeOCR/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Allyson.realTimeOCR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -293,7 +297,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 723SYA9Q4W;
 				INFOPLIST_FILE = realTimeOCR/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Allyson.realTimeOCR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
