@@ -11,7 +11,10 @@ import AVKit
 import Vision
 
 class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
-
+  
+  @IBOutlet weak var itemLabel: UILabel!
+  @IBOutlet weak var cameraLayer: UIView!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
@@ -29,8 +32,12 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     //displaying camera stuff
     let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-    view.layer.addSublayer(previewLayer)
+    cameraLayer.layer.addSublayer(previewLayer)
     previewLayer.frame = view.frame
+    self.view.addSubview(cameraLayer)
+    self.view.addSubview(itemLabel)
+    
+  
     
     //PRAGRMA: HANDLING IMAGES TAKEN IN
     let dataOutput = AVCaptureVideoDataOutput()
@@ -40,21 +47,23 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
   }
   
   //called everytime a camera frame is capture
-  func captureOutput(_ output: AVCaptureOutput, didDrop sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-    print("CAMERA CAPTURED")
+  func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
     
     guard let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {return}
-    guard let model = try? VNCoreMLModel(for: SqueezeNet().model) else {return}
+    guard let model = try? VNCoreMLModel(for: Resnet50().model) else {return}
     let request = VNCoreMLRequest(model: model) {(finishedReq, err) in
       //error checking
-      print(finishedReq.results)
       guard let results = finishedReq.results as? [VNClassificationObservation] else {return}
       
       guard let firstObservation = results.first else {return}
       
       print(firstObservation.identifier, firstObservation.confidence)
+      DispatchQueue.main.async {
+        self.itemLabel.text = firstObservation.identifier
+        self.itemLabel.bringSubview(toFront: self.view)
+      }
     }
-//    try? VNImageRequestHandler(cgImage: , options: <#T##[VNImageOption : Any]#>).perform(<#T##requests: [VNRequest]##[VNRequest]#>)
+    
     try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
 
   }

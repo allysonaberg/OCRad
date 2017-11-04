@@ -13,6 +13,7 @@
 		4190101A1FAE59D5006315FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 419010191FAE59D5006315FC /* Assets.xcassets */; };
 		4190101D1FAE59D5006315FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4190101B1FAE59D5006315FC /* LaunchScreen.storyboard */; };
 		419010251FAE612E006315FC /* SqueezeNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 419010241FAE612D006315FC /* SqueezeNet.mlmodel */; };
+		419010271FAE8B1D006315FC /* Resnet50.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 419010261FAE8B1D006315FC /* Resnet50.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		4190101C1FAE59D5006315FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4190101E1FAE59D5006315FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		419010241FAE612D006315FC /* SqueezeNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SqueezeNet.mlmodel; sourceTree = "<group>"; };
+		419010261FAE8B1D006315FC /* Resnet50.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Resnet50.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				419010121FAE59D5006315FC /* AppDelegate.swift */,
 				419010141FAE59D5006315FC /* ViewController.swift */,
 				419010241FAE612D006315FC /* SqueezeNet.mlmodel */,
+				419010261FAE8B1D006315FC /* Resnet50.mlmodel */,
 				419010161FAE59D5006315FC /* Main.storyboard */,
 				419010191FAE59D5006315FC /* Assets.xcassets */,
 				4190101B1FAE59D5006315FC /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 			files = (
 				419010151FAE59D5006315FC /* ViewController.swift in Sources */,
 				419010251FAE612E006315FC /* SqueezeNet.mlmodel in Sources */,
+				419010271FAE8B1D006315FC /* Resnet50.mlmodel in Sources */,
 				419010131FAE59D5006315FC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
