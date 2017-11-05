@@ -32,13 +32,10 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     //displaying camera stuff
     let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+    previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
     cameraLayer.layer.addSublayer(previewLayer)
-    previewLayer.frame = view.frame
-    self.view.addSubview(cameraLayer)
-    self.view.addSubview(itemLabel)
-    
-  
-    
+    previewLayer.frame = cameraLayer.frame
+
     //PRAGRMA: HANDLING IMAGES TAKEN IN
     let dataOutput = AVCaptureVideoDataOutput()
     dataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "videoQueue"))
