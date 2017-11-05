@@ -56,7 +56,9 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
       
       print(firstObservation.identifier, firstObservation.confidence)
       DispatchQueue.main.async {
-        self.itemLabel.text = firstObservation.identifier
+        let name = firstObservation.identifier.components(separatedBy: ",")[0]
+        let confidence = firstObservation.confidence
+        self.itemLabel.text = "\(name)" + "  " + "\(confidence)"
         self.itemLabel.bringSubview(toFront: self.view)
       }
     }
