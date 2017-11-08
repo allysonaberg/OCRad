@@ -15,6 +15,8 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
   @IBOutlet weak var itemLabel: UILabel!
   @IBOutlet weak var cameraLayer: UIView!
   
+  private let handler = VNSequenceRequestHandler()
+  fileprivate var lastObservation: vNDetectedObjectObservation
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
@@ -48,6 +50,10 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     guard let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {return}
     guard let model = try? VNCoreMLModel(for: Resnet50().model) else {return}
+    //IMAGE DETECTION
+    
+    
+    //IMAGE RECOGNITION
     let request = VNCoreMLRequest(model: model) {(finishedReq, err) in
       //error checking
       guard let results = finishedReq.results as? [VNClassificationObservation] else {return}
