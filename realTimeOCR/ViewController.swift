@@ -43,7 +43,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     
-    
+    view.addSubview(highlightView)
     //tap stuff
     let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(tapAction))
     view.addGestureRecognizer(tapGestureRecognizer)
@@ -53,7 +53,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
 //    guard let input = try? AVCaptureDeviceInput(device: captureDevice) else {return}
 //    captureSession.addInput(input)
 //    captureSession.sessionPreset = .photo
-//    captureSession.startRunning()
+    captureSession.startRunning()
 //
     
     //displaying camera stuff
@@ -71,7 +71,8 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
   //called everytime a camera frame is capture
   func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
     
-    guard let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {return}
+    guard let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer),
+    let observation = lastObservation else {return}
     guard let model = try? VNCoreMLModel(for: Resnet50().model) else {return}
     
     
@@ -91,9 +92,10 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
       }
   }
     //IMAGE DETECTION
-    guard let observation = self.lastObservation else {return}
-    let requestDetection = VNTrackObjectRequest(detectedObjectObservation: observation) { [unowned self] requestDetection, error in
-      self.handle(requestDetection, error: error)
+//    guard let observation = self.lastObservation else {return}
+    
+    let requestDetection = VNTrackObjectRequest(detectedObjectObservation: observation) { (request, error) in
+      self.handle(request, error: error)
     }
     requestDetection.trackingLevel = .accurate
     do {
