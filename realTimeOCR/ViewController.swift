@@ -106,6 +106,9 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
     
     try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
+    try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([requestDetection])
+
+    
 
     //
   }
