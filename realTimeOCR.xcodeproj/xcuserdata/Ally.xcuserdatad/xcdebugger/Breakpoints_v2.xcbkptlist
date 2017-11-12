@@ -10,13 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "realTimeOCR/ViewController.swift"
-            timestampString = "531606015.995248"
+            timestampString = "532143626.195201"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "captureOutput(_:didOutput:from:)"
-            landmarkType = "7">
+            startingLineNumber = "82"
+            endingLineNumber = "82">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -26,13 +24,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "realTimeOCR/ViewController.swift"
-            timestampString = "531606015.995348"
+            timestampString = "532143626.195655"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
-            landmarkName = "captureOutput(_:didOutput:from:)"
-            landmarkType = "7">
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "ViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -42,29 +40,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "realTimeOCR/ViewController.swift"
-            timestampString = "531606015.995421"
+            timestampString = "532143626.196042"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "captureOutput(_:didOutput:from:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "realTimeOCR/ViewController.swift"
-            timestampString = "531606015.995491"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "captureOutput(_:didOutput:from:)"
-            landmarkType = "7">
+            startingLineNumber = "82"
+            endingLineNumber = "82">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -106,13 +86,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "realTimeOCR/ViewController.swift"
-            timestampString = "531606015.995558"
+            timestampString = "532143626.196427"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "captureOutput(_:didOutput:from:)"
-            landmarkType = "7">
+            startingLineNumber = "82"
+            endingLineNumber = "82">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -122,13 +100,193 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "realTimeOCR/ViewController.swift"
-            timestampString = "531606015.995619"
+            timestampString = "532143626.196777"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
-            landmarkName = "captureOutput(_:didOutput:from:)"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "realTimeOCR.ViewController.(previewLayer in _9B696B182A5A383A3107EA42B13902E8).getter : __ObjC.AVCaptureVideoPreviewLayer"
+                  moduleName = "realTimeOCR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Ally/realTimeOCR/realTimeOCR/ViewController.swift"
+                  timestampString = "531875886.916719"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "145">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "realTimeOCR.ViewController.(previewLayer in _9B696B182A5A383A3107EA42B13902E8).setter : __ObjC.AVCaptureVideoPreviewLayer"
+                  moduleName = "realTimeOCR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Ally/realTimeOCR/realTimeOCR/ViewController.swift"
+                  timestampString = "531875886.918749"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "112">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "realTimeOCR.ViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; realTimeOCR.ViewController"
+                  moduleName = "realTimeOCR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Ally/realTimeOCR/realTimeOCR/ViewController.swift"
+                  timestampString = "531875886.920605"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "363">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "realTimeOCR.ViewController.init(coder: __ObjC.NSCoder) -&gt; Swift.Optional&lt;realTimeOCR.ViewController&gt;"
+                  moduleName = "realTimeOCR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Ally/realTimeOCR/realTimeOCR/ViewController.swift"
+                  timestampString = "531875886.922364"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "277">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "realTimeOCR/ViewController.swift"
+            timestampString = "532143626.197143"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "realTimeOCR/ViewController.swift"
+            timestampString = "532143626.1975"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "realTimeOCR/ViewController.swift"
+            timestampString = "532143626.197857"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "realTimeOCR/ViewController.swift"
+            timestampString = "532143626.198208"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "realTimeOCR.ViewController.captureOutput(__ObjC.AVCaptureOutput, didOutput: __ObjC.CMSampleBuffer, from: __ObjC.AVCaptureConnection) -&gt; ()"
+                  moduleName = "realTimeOCR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Ally/realTimeOCR/realTimeOCR/ViewController.swift"
+                  timestampString = "531877517.909662"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "97"
+                  endingLineNumber = "97"
+                  offsetFromSymbolStart = "460">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (__ObjC.VNRequest, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in realTimeOCR.ViewController.captureOutput(__ObjC.AVCaptureOutput, didOutput: __ObjC.CMSampleBuffer, from: __ObjC.AVCaptureConnection) -&gt; ()"
+                  moduleName = "realTimeOCR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Ally/realTimeOCR/realTimeOCR/ViewController.swift"
+                  timestampString = "531877517.911935"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "98"
+                  endingLineNumber = "98"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "realTimeOCR/ViewController.swift"
+            timestampString = "532143626.198561"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "realTimeOCR/ViewController.swift"
+            timestampString = "532143626.198934"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

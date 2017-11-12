@@ -12,6 +12,7 @@ import Vision
 
 class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
   
+  @IBOutlet weak var valueLabel: UILabel!
   @IBOutlet weak var itemLabel: UILabel!
   @IBOutlet weak var cameraLayer: UIView!
   
@@ -56,9 +57,12 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
       
       print(firstObservation.identifier, firstObservation.confidence)
       DispatchQueue.main.async {
+        self.valueLabel.isHidden = false
+        self.itemLabel.isHidden = false
         let name = firstObservation.identifier.components(separatedBy: ",")[0]
-        let confidence = firstObservation.confidence
-        self.itemLabel.text = "\(name)" + "  " + "\(confidence)"
+        let confidence = firstObservation.confidence * 100
+        self.valueLabel.text = "\(confidence)"
+        self.itemLabel.text = name
         self.itemLabel.bringSubview(toFront: self.view)
       }
     }

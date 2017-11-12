@@ -21,21 +21,46 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TEST" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJY-TX-VME">
-                                <rect key="frame" x="179.33333333333334" y="92.333333333333329" width="54.666666666666657" height="27.666666666666671"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tp2-qc-UGH" userLabel="barView">
+                                <rect key="frame" x="0.0" y="666" width="414" height="70"/>
+                                <subviews>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VALUE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SSA-jE-8jz" userLabel="Value Label">
+                                        <rect key="frame" x="30" y="21" width="69" height="28"/>
+                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="LABEL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJY-TX-VME">
+                                        <rect key="frame" x="107" y="20" width="240" height="28"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="240" id="hZ7-tG-rNt"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="SSA-jE-8jz" firstAttribute="leading" secondItem="tp2-qc-UGH" secondAttribute="leading" constant="30" id="7UZ-aB-ZKf"/>
+                                    <constraint firstItem="vJY-TX-VME" firstAttribute="leading" secondItem="SSA-jE-8jz" secondAttribute="trailing" constant="8" symbolic="YES" id="8KB-Ri-75S"/>
+                                    <constraint firstItem="vJY-TX-VME" firstAttribute="centerY" secondItem="tp2-qc-UGH" secondAttribute="centerY" id="9Bo-Rg-EJU"/>
+                                    <constraint firstItem="SSA-jE-8jz" firstAttribute="centerY" secondItem="tp2-qc-UGH" secondAttribute="centerY" id="A5G-JI-tsA"/>
+                                    <constraint firstAttribute="height" constant="70" id="hZ0-dw-rpD"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Y9W-Gd-s6U" firstAttribute="top" secondItem="vJY-TX-VME" secondAttribute="bottom" constant="-120" id="Gd2-05-mJ3"/>
+                            <constraint firstItem="tp2-qc-UGH" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="5vi-SF-wg1"/>
+                            <constraint firstItem="tp2-qc-UGH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-70" id="Iyy-Vr-nVk"/>
+                            <constraint firstAttribute="bottom" secondItem="tp2-qc-UGH" secondAttribute="bottom" id="UjX-mU-CEb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Y9W-Gd-s6U" secondAttribute="trailing" id="WMU-r5-ka4"/>
                             <constraint firstItem="Y9W-Gd-s6U" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Wjw-fe-yA0"/>
-                            <constraint firstItem="vJY-TX-VME" firstAttribute="centerX" secondItem="Y9W-Gd-s6U" secondAttribute="centerX" id="Xnz-s5-hDc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Y9W-Gd-s6U" secondAttribute="bottom" id="bZZ-hz-Lss"/>
+                            <constraint firstItem="tp2-qc-UGH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="cxj-T4-3Lt"/>
                             <constraint firstItem="Y9W-Gd-s6U" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-20" id="ue0-ZD-Fgf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -43,11 +68,26 @@
                     <connections>
                         <outlet property="cameraLayer" destination="Y9W-Gd-s6U" id="ep3-HG-SqX"/>
                         <outlet property="itemLabel" destination="vJY-TX-VME" id="aGF-EJ-dFQ"/>
+                        <outlet property="valueLabel" destination="SSA-jE-8jz" id="v0N-3U-MAv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="134.78260869565219" y="104.34782608695653"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="YJE-6Q-G5P">
+            <objects>
+                <viewController id="gay-OR-z3m" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5J7-mA-KcE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="BHY-WK-Qw3"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A8X-B5-Hcs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
 </document>
