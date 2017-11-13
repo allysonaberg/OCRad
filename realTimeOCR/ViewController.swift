@@ -65,8 +65,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
   //called everytime a camera frame is captured
   func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
     
-    guard let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer),
-    let observation = lastObservation else {return}
+    guard let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {return}
     guard let model = try? VNCoreMLModel(for: Resnet50().model) else {return}
     
     
@@ -82,8 +81,12 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         self.itemLabel.bringSubview(toFront: self.view)
       }
     }
+    try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
+
     
-    //IMAGE DETECTION
+
+    //IMAGE DETECTION AND TRACKING?
+    guard let observation = lastObservation else {return}
     let requestDetection = VNTrackObjectRequest(detectedObjectObservation: observation) { (request, error) in
       self.handle(request, error: error)
     }
@@ -94,10 +97,8 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     catch {
       print(error)
     }
-    
-    //running the two different requests
-    try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
     try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([requestDetection])
+    
   }
 
   //PRAGMA MARK: ACTIONS
@@ -119,8 +120,8 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
       guard let newObservation = request.results?.first as? VNDetectedObjectObservation else {
         return
       }
-      self.lastObservation = newObservation
       
+      self.lastObservation = newObservation
       var transformedRect = newObservation.boundingBox
       transformedRect.origin.y = 1 - transformedRect.origin.y
       let convertedRect = self.previewLayer.layerRectConverted(fromMetadataOutputRect: transformedRect)
