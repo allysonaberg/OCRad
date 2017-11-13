@@ -12,6 +12,7 @@ import Vision
 
 class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
   
+  //PRAGMA MARK: VARS/DECLARATIONS
   @IBOutlet weak var itemLabel: UILabel!
   @IBOutlet weak var cameraLayer: UIView!
   
@@ -19,18 +20,17 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
   fileprivate var lastObservation: VNDetectedObjectObservation?
   private let handler = VNSequenceRequestHandler()
 
-
+  //camera stuff
   private lazy var captureSession: AVCaptureSession = {
     let session = AVCaptureSession()
     session.sessionPreset = AVCaptureSession.Preset.photo
     guard let backCamera = AVCaptureDevice.default(for: .video),
-      let input = try? AVCaptureDeviceInput(device: backCamera) else {
-        return session
-    }
+    let input = try? AVCaptureDeviceInput(device: backCamera) else {return session}
     session.addInput(input)
     return session
   }()
   
+  //tracker stuff
   lazy var highlightView: UIView = {
     let view = UIView()
     view.layer.borderColor = UIColor.red.cgColor
@@ -39,36 +39,30 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     return view
   }()
   
+  
+  //PRAGMA MARK: FCNS
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
     
     view.addSubview(highlightView)
-    //tap stuff
     let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(tapAction))
     view.addGestureRecognizer(tapGestureRecognizer)
-    //PRAGMA: CAMERA STUFF
-    //camera stuff
-//    guard let captureDevice = AVCaptureDevice.default(for: .video) else {return}
-//    guard let input = try? AVCaptureDeviceInput(device: captureDevice) else {return}
-//    captureSession.addInput(input)
-//    captureSession.sessionPreset = .photo
     captureSession.startRunning()
-//
     
     //displaying camera stuff
     previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
     cameraLayer.layer.addSublayer(previewLayer)
     previewLayer.frame = cameraLayer.frame
 
-    //PRAGRMA: HANDLING IMAGES TAKEN IN
+    //handling images taken in
     let dataOutput = AVCaptureVideoDataOutput()
     dataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "videoQueue"))
     captureSession.addOutput(dataOutput)
-    
   }
   
-  //called everytime a camera frame is capture
+  
+  
+  //called everytime a camera frame is captured
   func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
     
     guard let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer),
@@ -76,12 +70,9 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     guard let model = try? VNCoreMLModel(for: Resnet50().model) else {return}
     
     
-  
     //IMAGE RECOGNITION
     let request = VNCoreMLRequest(model: model) {(finishedReq, err) in
-      //error checking
       guard let results = finishedReq.results as? [VNClassificationObservation] else {return}
-      
       guard let firstObservation = results.first else {return}
       print(firstObservation.identifier, firstObservation.confidence)
       DispatchQueue.main.async {
@@ -90,10 +81,9 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         self.itemLabel.text = "\(name)" + "  " + "\(confidence)"
         self.itemLabel.bringSubview(toFront: self.view)
       }
-  }
-    //IMAGE DETECTION
-//    guard let observation = self.lastObservation else {return}
+    }
     
+    //IMAGE DETECTION
     let requestDetection = VNTrackObjectRequest(detectedObjectObservation: observation) { (request, error) in
       self.handle(request, error: error)
     }
@@ -105,17 +95,9 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
       print(error)
     }
     
+    //running the two different requests
     try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
     try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([requestDetection])
-
-    
-
-    //
-  }
-
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
   }
 
   //PRAGMA MARK: ACTIONS
@@ -130,7 +112,6 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     lastObservation = VNDetectedObjectObservation(boundingBox: convertedRect)
   }
-  
   
   
   fileprivate func handle(_ request: VNRequest, error: Error?) {
