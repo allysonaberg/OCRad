@@ -19,13 +19,16 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
   private lazy var previewLayer: AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
   fileprivate var lastObservation: VNDetectedObjectObservation?
   private let handler = VNSequenceRequestHandler()
-
+  var requests = [VNRequest]()
+  let dispatchQueueML = DispatchQueue(label: "com.hw.dispatchqueueml") // A Serial Queue
+  
+  
   //camera stuff
   private lazy var captureSession: AVCaptureSession = {
     let session = AVCaptureSession()
-    session.sessionPreset = AVCaptureSession.Preset.photo
+    session.sessionPreset = .high
     guard let backCamera = AVCaptureDevice.default(for: .video),
-    let input = try? AVCaptureDeviceInput(device: backCamera) else {return session}
+      let input = try? AVCaptureDeviceInput(device: backCamera) else {return session}
     session.addInput(input)
     return session
   }()
@@ -40,7 +43,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
   }()
   
   
-  //PRAGMA MARK: FCNS
+  //PRAGMA MARK: FXNS
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -53,7 +56,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
     cameraLayer.layer.addSublayer(previewLayer)
     previewLayer.frame = cameraLayer.frame
-
+    
     //handling images taken in
     let dataOutput = AVCaptureVideoDataOutput()
     dataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "videoQueue"))
@@ -70,37 +73,13 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     
     //IMAGE RECOGNITION
-    let request = VNCoreMLRequest(model: model) {(finishedReq, err) in
-      guard let results = finishedReq.results as? [VNClassificationObservation] else {return}
-      guard let firstObservation = results.first else {return}
-      print(firstObservation.identifier, firstObservation.confidence)
-      DispatchQueue.main.async {
-        let name = firstObservation.identifier.components(separatedBy: ",")[0]
-        let confidence = firstObservation.confidence
-        self.itemLabel.text = "\(name)" + "  " + "\(confidence)"
-        self.itemLabel.bringSubview(toFront: self.view)
-      }
-    }
-    try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
-
+    performRecognition(pixelBuffer: pixelBuffer, model: model)
     
-
     //IMAGE DETECTION AND TRACKING?
-    guard let observation = lastObservation else {return}
-    let requestDetection = VNTrackObjectRequest(detectedObjectObservation: observation) { (request, error) in
-      self.handle(request, error: error)
-    }
-    requestDetection.trackingLevel = .accurate
-    do {
-      try self.handler.perform([request], on: pixelBuffer)
-    }
-    catch {
-      print(error)
-    }
-    try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([requestDetection])
+    performTracking(pixelBuffer: pixelBuffer)
     
   }
-
+  
   //PRAGMA MARK: ACTIONS
   
   @objc private func tapAction(recognizer: UITapGestureRecognizer) {
@@ -112,6 +91,79 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     convertedRect.origin.y = 1 - convertedRect.origin.y
     
     lastObservation = VNDetectedObjectObservation(boundingBox: convertedRect)
+  }
+  
+  fileprivate func performRecognition(pixelBuffer: CVPixelBuffer, model: VNCoreMLModel) {
+    let request = VNCoreMLRequest(model: model, completionHandler: recognitionCompleteHandler)
+    request.imageCropAndScaleOption = VNImageCropAndScaleOption.centerCrop //make it easier to detect object in center
+    requests = [request]
+    updateCoreML(pixelBuffer: pixelBuffer)
+    
+  }
+  
+  fileprivate func performTracking(pixelBuffer: CVPixelBuffer) {
+    guard let observation = lastObservation else {return}
+    let requestDetection = VNTrackObjectRequest(detectedObjectObservation: observation) { (request, error) in
+      self.handle(request, error: error)
+    }
+    requestDetection.trackingLevel = .accurate
+    do {
+      try self.handler.perform([requestDetection], on: pixelBuffer)
+    }
+    catch {
+      print(error)
+    }
+    try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([requestDetection])
+  }
+  
+  
+  func updateCoreML(pixelBuffer: CVPixelBuffer) {
+    
+    // Get Camera Image as RGB
+    let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
+    
+    // Prepare CoreML/Vision Request
+    let imageRequestHandler = VNImageRequestHandler(ciImage: ciImage, options: [:])
+    // let imageRequestHandler = VNImageRequestHandler(cgImage: cgImage!, orientation: myOrientation, options: [:]) // Alternatively; we can convert the above to an RGB CGImage and use that. Also UIInterfaceOrientation can inform orientation values.
+    
+    // Run Image Request
+    do {
+      try imageRequestHandler.perform(self.requests)
+    } catch {
+      print(error)
+    }
+    
+  }
+  
+  func recognitionCompleteHandler(request: VNRequest, error: Error?) {
+    if error != nil {
+      print("Error: " + (error?.localizedDescription)!)
+      return
+    }
+    guard let observations = request.results else {
+      print("No results")
+      return
+    }
+    
+    // Get Classifications
+    let classifications = observations[0...1]
+      .flatMap({ $0 as? VNClassificationObservation })
+      .map({ "\($0.identifier) \(String(format:"- %.2f", $0.confidence))" })
+      .joined(separator: "\n")
+    
+    
+    DispatchQueue.main.async {
+      // Print Classifications
+      print(classifications)
+      print("--")
+      
+      // Store the latest prediction
+      var objectName:String = "…"
+      objectName = classifications.components(separatedBy: "-")[0]
+      objectName = objectName.components(separatedBy: ",")[0]
+      self.itemLabel.text = classifications
+      
+    }
   }
   
   
@@ -129,3 +181,4 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
   }
 }
+
