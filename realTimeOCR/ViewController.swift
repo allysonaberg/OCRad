@@ -97,7 +97,9 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     let request = VNCoreMLRequest(model: model, completionHandler: recognitionCompleteHandler)
     request.imageCropAndScaleOption = VNImageCropAndScaleOption.centerCrop //make it easier to detect object in center
     requests = [request]
-    updateCoreML(pixelBuffer: pixelBuffer)
+    dispatchQueueML.sync {
+      updateCoreML(pixelBuffer: pixelBuffer)
+    }
     
   }
   
