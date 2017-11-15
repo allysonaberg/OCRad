@@ -42,7 +42,6 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     return view
   }()
   
-  
   //PRAGMA MARK: FXNS
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -164,10 +163,8 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
       objectName = classifications.components(separatedBy: "-")[0]
       objectName = objectName.components(separatedBy: ",")[0]
       self.itemLabel.text = classifications
-      
     }
   }
-  
   
   fileprivate func handle(_ request: VNRequest, error: Error?) {
     DispatchQueue.main.async {
