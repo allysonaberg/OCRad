@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "realTimeOCR/ViewController.swift"
-            timestampString = "532571258.172198"
+            timestampString = "532572237.90954"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
             landmarkName = "recognitionCompleteHandler(request:error:)"
             landmarkType = "7">
          </BreakpointContent>

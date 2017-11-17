@@ -163,10 +163,15 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
       
       // Store the latest prediction
       var objectName:String = "…"
+      var assurance:String = ""
       objectName = classifications.components(separatedBy: "-")[0]
       objectName = objectName.components(separatedBy: ",")[0]
-      self.itemLabel.text = classifications
+      assurance = classifications.components(separatedBy: "\n")[0]
+      assurance = assurance.components(separatedBy: "-")[1]
+      self.itemLabel.text = objectName
+      self.valueLabel.text = assurance
       self.itemLabel.isHidden = false
+      self.valueLabel.isHidden = false
     }
   }
   
