@@ -20,13 +20,13 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
   fileprivate var lastObservation: VNDetectedObjectObservation?
   private let handler = VNSequenceRequestHandler()
   var requests = [VNRequest]()
-  let dispatchQueueML = DispatchQueue(label: "com.hw.dispatchqueueml") // A Serial Queue
+  let dispatchQueueML = DispatchQueue(label: "com.hw.dispatchqueueml")
   
   
   //camera stuff
   private lazy var captureSession: AVCaptureSession = {
     let session = AVCaptureSession()
-    session.sessionPreset = .high
+    session.sessionPreset = AVCaptureSession.Preset.photo
     guard let backCamera = AVCaptureDevice.default(for: .video),
       let input = try? AVCaptureDeviceInput(device: backCamera) else {return session}
     session.addInput(input)
@@ -47,9 +47,9 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     super.viewDidLoad()
     
     view.addSubview(highlightView)
+    
     let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(tapAction))
     view.addGestureRecognizer(tapGestureRecognizer)
-    captureSession.startRunning()
     
     //displaying camera stuff
     previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
@@ -60,6 +60,8 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     let dataOutput = AVCaptureVideoDataOutput()
     dataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "videoQueue"))
     captureSession.addOutput(dataOutput)
+    captureSession.startRunning()
+
   }
   
   
@@ -114,7 +116,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     catch {
       print(error)
     }
-    try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([requestDetection])
+//    try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([requestDetection])
   }
   
   
