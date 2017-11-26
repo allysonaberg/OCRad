@@ -58,7 +58,100 @@ x_train /=255
 x_test /=255
 
 
+#OVERVIEW OF The CNN MODEL:
+#-four layers, convolutional
+def base_model():
+
+    model = Sequential()
+    model.add(Conv2D(32, (3, 3), padding='same', input_shape=x_train.shape[1:]))
+    model.add(Activation('relu'))
+    model.add(Conv2D(32,(3, 3)))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Dropout(0.25))
+
+    model.add(Conv2D(64, (3, 3), padding='same'))
+    model.add(Activation('relu'))
+    model.add(Conv2D(64, (3,3)))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Dropout(0.25))
+
+    model.add(Flatten())
+    model.add(Dense(512))
+    model.add(Activation('relu'))
+    model.add(Dropout(0.5))
+    model.add(Dense(num_classes))
+    model.add(Activation('softmax'))
+
+    sgd = SGD(lr = 0.1, decay=1e-6, momentum=0.9 nesterov=True)
+
+# Train model
+
+    model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
+    return model
+cnn_n = base_model()
+cnn_n.summary()
+
+# Fit model
+
+cnn = cnn_n.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_data=(x_test,y_test),shuffle=True)
 
 
+# Vizualizing model structure
+sequential_model_to_ascii_printout(cnn_n)
+
+# Plots for training and testing process: loss and accuracy
+
+plt.figure(0)
+plt.plot(cnn.history['acc'],'r')
+plt.plot(cnn.history['val_acc'],'g')
+plt.xticks(np.arange(0, 101, 2.0))
+plt.rcParams['figure.figsize'] = (8, 6)
+plt.xlabel("Num of Epochs")
+plt.ylabel("Accuracy")
+plt.title("Training Accuracy vs Validation Accuracy")
+plt.legend(['train','validation'])
+
+
+plt.figure(1)
+plt.plot(cnn.history['loss'],'r')
+plt.plot(cnn.history['val_loss'],'g')
+plt.xticks(np.arange(0, 101, 2.0))
+plt.rcParams['figure.figsize'] = (8, 6)
+plt.xlabel("Num of Epochs")
+plt.ylabel("Loss")
+plt.title("Training Loss vs Validation Loss")
+plt.legend(['train','validation'])
+
+
+plt.show()
+
+
+scores = cnn_n.evaluate(x_test, y_test, verbose=0)
+print("Accuracy: %.2f%%" % (scores[1]*100))
+
+# Confusion matrix result
+
+from sklearn.metrics import classification_report, confusion_matrix
+Y_pred = cnn_n.predict(x_test, verbose=2)
+y_pred = np.argmax(Y_pred, axis=1)
+
+for ix in range(10):
+    print(ix, confusion_matrix(np.argmax(y_test,axis=1),y_pred)[ix].sum())
+cm = confusion_matrix(np.argmax(y_test,axis=1),y_pred)
+print(cm)
+
+# Visualizing of confusion matrix
+import seaborn as sn
+import pandas  as pd
+
+
+df_cm = pd.DataFrame(cm, range(10),
+                  range(10))
+plt.figure(figsize = (10,7))
+sn.set(font_scale=1.4)#for label size
+sn.heatmap(df_cm, annot=True,annot_kws={"size": 12})# font size
+plt.show()
 
 
